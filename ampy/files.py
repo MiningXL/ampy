@@ -81,7 +81,7 @@ class Files(object):
                 else:
                     raise ex
             except UnicodeDecodeError:
-                raise ex
+                return binascii.unhexlify(out)
         self._pyboard.exit_raw_repl()
         return binascii.unhexlify(out)
 
