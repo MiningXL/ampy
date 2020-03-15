@@ -123,10 +123,13 @@ def get(remote_file, local_file):
     """
     # Get the file contents.
     board_files = files.Files(_board)
-    contents = board_files.get(remote_file)
+    contents, uce = board_files.get(remote_file)
     # Print the file out if no local file was provided, otherwise save it.
     if local_file is None:
-        print(contents.decode("utf-8"))
+        if uce:
+            print(contents.decode("utf-8"))
+        else:
+            raise UnicodeDecodeError
     else:
         local_file.write(contents)
 

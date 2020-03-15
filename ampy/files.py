@@ -81,9 +81,9 @@ class Files(object):
                 else:
                     raise ex
             except UnicodeDecodeError:
-                return binascii.unhexlify(out)
+                return binascii.unhexlify(out), 0
         self._pyboard.exit_raw_repl()
-        return binascii.unhexlify(out)
+        return binascii.unhexlify(out), 1
 
     def ls(self, directory="/", long_format=True, recursive=False):
         """List the contents of the specified directory (or root if none is
